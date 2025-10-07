@@ -50,7 +50,8 @@ async def paisget(idpais: int):
         tags=["geografia.pais"]
 )
 async def paispost(pais: PaisModel):
-    return pais
+    
+    return PaisModel
 
 
 @app.put(
