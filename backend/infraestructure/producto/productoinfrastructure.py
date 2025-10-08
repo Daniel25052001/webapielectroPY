@@ -1,19 +1,11 @@
 import psycopg2
 import psycopg2.extras
-from domain.geografia.pais import PaisModel
-class PaisInfrastructure:
+from domain.producto.productomodel import ProductoModel
 
-    def __init__(self):
-        pass
-
-
-
-
-
-
+class ProductoInfrastructure:
 
     ##############################################################
-def IngresarPais(self, paismodel: PaisModel):
+    def IngresarProducto(self, productomodel: ProductoModel):
         conn = None
         try:
             conn = psycopg2.connect(
@@ -25,39 +17,33 @@ def IngresarPais(self, paismodel: PaisModel):
             )
 
             with conn.cursor() as cur:
-                cur.execute("SELECT spaIngresarPais(%s);", (paismodel.Nombre,))
+                cur.execute(
+                    "SELECT spaIngresarProducto(%s, %s, %s, %s, %s, %s, %s);",
+                    (
+                        productomodel.Nombre,
+                        productomodel.Descripcion,
+                        productomodel.Precio,
+                        productomodel.Stock,
+                        productomodel.IdCategoria,
+                        productomodel.IdMarca,
+                        productomodel.IdModelo
+                    )
+                )
                 result = cur.fetchone()[0]
                 conn.commit()
-                result = 1
-            return result 
+                return result
 
         except Exception as e:
-            print("Error al ingresar país:", e)
+            print("Error al ingresar producto:", e)
             return None
 
         finally:
             if conn:
                 conn.close()
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ##############################################################
-def ConsultarPais(self):
+    def ConsultarProducto(self):
+        conn = None
         try:
             conn = psycopg2.connect(
                 dbname="dbtiendaelectro",
@@ -68,19 +54,14 @@ def ConsultarPais(self):
             )
 
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-                cur.execute("SELECT spaConsultarPais();")
+                cur.execute("SELECT spaConsultarProducto();")
                 result = cur.fetchall()
                 return result
 
         except Exception as e:
-            print("Error al consultar país:", e)
+            print("Error al consultar producto:", e)
             return []
 
         finally:
             if conn:
                 conn.close()
-   
-                                
-        
-
-         

@@ -61,8 +61,8 @@ async def paispost(pais: PaisModel):
         description="Operacion Pais Put",
         tags=["geografia.pais"]
 )
-async def paisput(idciudad: int, ciudadmodel: CiudadModel):
-    return ciudadmodel
+async def paisput(idpais: int, paismodel: PaisModel):
+    return paismodel
 
 
 @app.delete(
@@ -636,17 +636,4 @@ async def estadoventadelete(idestado: int):
 
 
 
-###########################################
-
-###########################################
-
-###########################################
-
-###########################################
-
-###########################################
-
-###########################################
-
-###########################################
 
